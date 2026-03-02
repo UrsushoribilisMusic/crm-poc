@@ -1,0 +1,69 @@
+.contact-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-list-header {
+  display: flex;
+  gap: 15px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.sort-select {
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: white;
+}
+
+.contact-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.contact-table th {
+  text-align: left;
+  padding: 12px 15px;
+  border-bottom: 2px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.contact-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--border);
+}
+
+.contact-table tr:hover {
+  background-color: #f1f3f5;
+}
+
+.tag-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  margin-right: 5px;
+  font-size: 0.75rem;
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.status-badge--active { background-color: #d4edda; color: #155724; }
+.status-badge--lead { background-color: #fff3cd; color: #856404; }
+.status-badge--inactive { background-color: #f8d7da; color: #721c24; }
