@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
+const BASE_URL = ""; // Using relative path for Vite proxy
 
 export async function fetchCustomers({ search = "", status = "" } = {}) {
   const params = new URLSearchParams();

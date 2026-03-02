@@ -10,9 +10,10 @@
 - **Contact Detail:** Click contact to see and create tasks specific to them.
 
 ### The 10-Ticket Roadmap
-1. [Frontend] Ticket 1: App Shell & Home Dashboard UI (Gemini)
-2. [Frontend] Ticket 2: Contact List View (Claude)
-3. [Frontend] Ticket 3: Global "Add Task" Modal (Claude)
+1. [x] [Frontend] Ticket 1: App Shell & Home Dashboard UI (Gemini)
+2. [x] [Frontend] Ticket 2: Contact List View (Claude)
+3. [ ] [Frontend] Ticket 3: Global 'Add Task' Modal (Claude)
+
 4. [Frontend] Ticket 4: Contact Detail View (Gemini)
 5. [Backend] Ticket 5: Schema Evolution (Gemini) - Add Location, Task, Activity models.
 6. [Backend] Ticket 6: Activity & Task API (Claude)
