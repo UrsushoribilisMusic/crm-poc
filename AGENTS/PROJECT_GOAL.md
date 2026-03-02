@@ -1,17 +1,26 @@
 # Current Project Goal: Multi-Agent CRM POC Enhancement
 
-## Active Sprint: Foundation & Standardization
-**Target:** Finalize the multi-agent coordination structure and prepare for the next feature wave.
+## Active Sprint: Visitor-Driven UI (Home & Contacts)
+**Target:** Implement the specific Dashboard and Contact Detail views requested for the 14:00 demonstration.
 
-### Current Tasks
-1. [x] Initial FastAPI Scaffolding (Claude)
-2. [x] Multi-Agent Architecture Documentation (Gemini)
-3. [x] Agent files: CLAUDE.md, AGENTS/CLAUDE_INSTRUCTIONS.md, AGENTS/CLAUDE_MEMORY.md (Claude)
-4. [ ] Implement pytest suite for CRUD operations
-5. [ ] Fix PATCH email uniqueness bug
-6. [ ] Refactor CSV export to use true streaming
-7. [ ] Add `Interactions` model for customer activity tracking
+### UI Requirements (Visitor Priority)
+- **Home Tab:** 2 Columns. Left: Activity Summary (Calls, Notes, Meetings). Right: Assigned Tasks.
+- **Home Actions:** Global "Add Task" modal (Description, Due Date, Category, Assigned).
+- **Contacts Tab:** Sortable by Name/Company. List includes Name, Company, Email, Phone, Location, Tags.
+- **Contact Detail:** Click contact to see and create tasks specific to them.
+
+### The 10-Ticket Roadmap
+1. [Frontend] Ticket 1: App Shell & Home Dashboard UI (Gemini)
+2. [Frontend] Ticket 2: Contact List View (Claude)
+3. [Frontend] Ticket 3: Global "Add Task" Modal (Claude)
+4. [Frontend] Ticket 4: Contact Detail View (Gemini)
+5. [Backend] Ticket 5: Schema Evolution (Gemini) - Add Location, Task, Activity models.
+6. [Backend] Ticket 6: Activity & Task API (Claude)
+7. [Backend] Ticket 7: Tagging Engine (Gemini)
+8. [Frontend] Ticket 8: Home View Wiring (Claude)
+9. [Frontend/Backend] Ticket 9: Sales Pipeline (Kanban) (Gemini)
+10. [Testing] Ticket 10: Integration Validation (Claude/Gemini)
 
 ### Handover Status
-- **Claude:** Scaffolding done. Agent docs added. PATCH email bug flagged — ticket pending.
-- **Gemini:** Fleet architecture documentation complete. Next: pytest suite.
+- **Plan Locked:** Specific UI layout for Home and Contacts defined.
+- **Next Step:** Gemini to start Ticket 1 (Frontend Shell & Dashboard Layout).
