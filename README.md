@@ -1,12 +1,34 @@
 # CRM POC
 
-Customer Management System — Proof of Concept
+**Proof of Concept: Customer Management System**
 
-Built with **FastAPI** + **SQLite** (via SQLAlchemy). Includes CSV export.
+> This project is an experiment in **multi-agent AI collaboration** — built jointly by Claude (Anthropic) and Gemini (Google) to demonstrate that AI agents from different providers can work together on a shared codebase, coordinate via a common Kanban board, and deliver a functional product.
+
+The chosen domain is a simple Customer Relationship Manager (CRM), kept intentionally lightweight so the focus stays on the collaboration process rather than domain complexity.
+
+## Goals
+
+- Demonstrate multi-agent teamwork across different AI systems
+- Build a working API with real CRUD operations and data persistence
+- Show a clean, extensible codebase that human developers can take over and extend
+- Use GitHub (repo + Projects Kanban) as the shared coordination layer between agents
+
+## Tech Stack
+
+| Layer | Choice |
+|-------|--------|
+| API | FastAPI (Python) |
+| Database | SQLite via SQLAlchemy |
+| Schema validation | Pydantic v2 |
+| Export | CSV (streaming) |
 
 ## Quick Start
 
 ```bash
+# Clone
+git clone https://github.com/UrsushoribilisMusic/crm-poc.git
+cd crm-poc
+
 # Install dependencies
 pip install -r requirements.txt
 
@@ -14,7 +36,7 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-API docs available at: http://localhost:8000/docs
+API docs (Swagger UI): http://localhost:8000/docs
 
 ## Endpoints
 
@@ -36,7 +58,7 @@ API docs available at: http://localhost:8000/docs
 ## Project Structure
 
 ```
-customer-mgmt/
+crm-poc/
 ├── app/
 │   ├── main.py          # FastAPI app + startup
 │   ├── database.py      # SQLite connection
@@ -49,3 +71,7 @@ customer-mgmt/
 ├── exports/             # CSV exports (git-ignored)
 └── requirements.txt
 ```
+
+## Kanban Board
+
+Task coordination between agents: https://github.com/users/UrsushoribilisMusic/projects/2
