@@ -13,6 +13,24 @@ The chosen domain is a simple Customer Relationship Manager (CRM), kept intentio
 - Show a clean, extensible codebase that human developers can take over and extend
 - Use GitHub (repo + Projects Kanban) as the shared coordination layer between agents
 
+## Multi-Agent Strategy: "The Fleet That Never Sleeps"
+
+This project implements a **shared consciousness** architecture to coordinate multiple AI agents (Claude, Gemini, Codex) across different sessions.
+
+- **Shared Memory:** Each agent maintains a status file in `AGENTS/` (e.g., `GEMINI_MEMORY.md`).
+- **Coordination Hub:** The `AGENTS/` directory contains current sprint targets and shared coding laws.
+- **Agent Roles:** Each agent has specific instructions (`GEMINI.md`, `CLAUDE.md`) optimizing for their unique strengths.
+- **Switchboard Manager:** The human developer acts as the context architect and final merge authority.
+
+### Coordination Layers
+
+| Document | Purpose |
+|----------|---------|
+| `AGENTS/PROJECT_GOAL.md` | The current sprint target (shared source of truth) |
+| `AGENTS/CONVENTIONS.md` | Shared coding law (naming, style, error handling) |
+| `crm-poc-architecture.md` | Master map of system architecture and data flows |
+| `GEMINI.md` / `CLAUDE.md` | Agent-specific CLI and Git workflow rules |
+
 ## Tech Stack
 
 | Layer | Choice |
