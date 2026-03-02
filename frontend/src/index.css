@@ -139,6 +139,11 @@ body {
   color: var(--white);
 }
 
+.btn-secondary {
+  background-color: var(--secondary);
+  color: var(--white);
+}
+
 .badge {
   padding: 2px 8px;
   border-radius: 12px;
