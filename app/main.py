@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from .database import engine
 from .models import Base
-from .routers import customers
+from .routers import customers, tasks, activities
 
 # Create all tables on startup
 Base.metadata.create_all(bind=engine)
@@ -22,6 +22,8 @@ app.add_middleware(
 )
 
 app.include_router(customers.router)
+app.include_router(tasks.router)
+app.include_router(activities.router)
 
 
 @app.get("/")
