@@ -1,19 +1,19 @@
 # Gemini Memory: Status & Context Handover
 
-## Last Active Session: March 2, 2026 (14:15)
-**Current Focus:** Implementing Visitor-Ready UI Layout.
+## Last Active Session: March 2, 2026 (15:00)
+**Current Focus:** Ready for Integration Validation (Ticket 10).
 
 ### Completed This Session
-- [x] Stored all 10 tickets in GitHub Projects Kanban (`projects/2`).
-- [x] Refined roadmap based on Martin's specific UI requests (Dashboard Columns + Task/Contact Flow).
+- [x] **Ticket 1:** Full App Shell with Sidebar, Theme, and dual-column Home Dashboard.
+- [x] **Ticket 4:** Contact Detail view with contact-specific tasks and info.
+- [x] **Ticket 5:** Backend Schema Evolution (Location, Task, Activity, Opportunity).
+- [x] **Ticket 7:** Many-to-Many Tagging Engine.
+- [x] **Ticket 9:** Visual Sales Pipeline (Kanban) UI and Opportunity API support.
+- [x] Integrated Claude's `ContactList` and `AddTaskModal` components.
 
-### Next Session Strategy (Restart with `gemini -r latest --yes`)
-1. **Ticket 1 Execution:** 
-   - Setup Vite + React + Vanilla CSS.
-   - Create the App Shell with "Home" and "Contacts" tabs.
-   - Design the Dashboard with the dual-column layout (Activities left, Tasks right).
-   - Use CSS Grid/Flexbox for a clean, modern look.
-
-### Context for Restart
-- **Non-Interactive Mode:** Ready for autonomous execution.
-- **Visitor Present:** Focus on high-signal UI first. Use mock components where backend is pending.
+### Handover for Next Session
+- **Frontend Branch:** `feature/1-app-shell-dashboard` is the current workhorse.
+- **Backend:** All models and schemas are in place. 
+- **Next Steps:**
+    - Perform final "wiring" (Tickets 8 and 10).
+    - Ticket 6 (Claude) needs to finalize the Activity/Task API logic.

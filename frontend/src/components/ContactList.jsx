@@ -92,7 +92,7 @@ export default function ContactList({ onSelectContact }) {
               </tr>
             )}
             {!loading && sorted.map((c) => (
-              <tr key={c.id} onClick={() => onSelectContact?.(c)}>
+              <tr key={c.id} onClick={() => onSelectContact?.(c)} style={{ cursor: 'pointer' }}>
                 <td>{c.first_name} {c.last_name}</td>
                 <td>{c.company ?? "—"}</td>
                 <td>{c.email}</td>
@@ -100,7 +100,16 @@ export default function ContactList({ onSelectContact }) {
                 <td>{c.location ?? "—"}</td>
                 <td>
                   {(c.tags ?? []).map((t) => (
-                    <span key={t} className="tag">{t}</span>
+                    <span key={t.id} className="tag" style={{ 
+                      display: 'inline-block', 
+                      padding: '2px 6px', 
+                      backgroundColor: '#eee', 
+                      borderRadius: '4px', 
+                      marginRight: '4px', 
+                      fontSize: '0.75rem' 
+                    }}>
+                      {t.name}
+                    </span>
                   ))}
                 </td>
                 <td>

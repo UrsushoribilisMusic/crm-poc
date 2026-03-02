@@ -4,10 +4,10 @@ from typing import List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi.responses import StreamingResponse
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 
 from ..database import get_db
-from ..models import Customer
+from ..models import Customer, Tag
 from ..schemas import CustomerCreate, CustomerUpdate, CustomerOut
 
 router = APIRouter(prefix="/customers", tags=["customers"])
@@ -21,7 +21,7 @@ def list_customers(
     search: Optional[str] = Query(None),
     db: Session = Depends(get_db),
 ):
-    query = db.query(Customer)
+    query = db.query(Customer).options(joinedload(Customer.tags))
     if status:
         query = query.filter(Customer.status == status)
     if search:
@@ -44,12 +44,13 @@ def create_customer(payload: CustomerCreate, db: Session = Depends(get_db)):
     db.add(customer)
     db.commit()
     db.refresh(customer)
-    return customer
+    # Return with tags
+    return db.query(Customer).options(joinedload(Customer.tags)).filter(Customer.id == customer.id).first()
 
 
 @router.get("/{customer_id}", response_model=CustomerOut)
 def get_customer(customer_id: int, db: Session = Depends(get_db)):
-    customer = db.query(Customer).filter(Customer.id == customer_id).first()
+    customer = db.query(Customer).options(joinedload(Customer.tags)).filter(Customer.id == customer_id).first()
     if not customer:
         raise HTTPException(status_code=404, detail="Customer not found")
     return customer
@@ -70,7 +71,8 @@ def update_customer(
         setattr(customer, field, value)
     db.commit()
     db.refresh(customer)
-    return customer
+    # Return with tags
+    return db.query(Customer).options(joinedload(Customer.tags)).filter(Customer.id == customer.id).first()
 
 
 @router.delete("/{customer_id}", status_code=204)
