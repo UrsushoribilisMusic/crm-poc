@@ -29,14 +29,34 @@ The chosen domain is a simple Customer Relationship Manager (CRM), kept intentio
 git clone https://github.com/UrsushoribilisMusic/crm-poc.git
 cd crm-poc
 
-# Install dependencies
-pip install -r requirements.txt
+# Create virtual environment and install dependencies
+make setup
 
-# Run the server
-uvicorn app.main:app --reload
+# Run with auto-reload (development)
+make dev
 ```
 
 API docs (Swagger UI): http://localhost:8000/docs
+
+### Manual setup (without make)
+
+```bash
+python -m venv .venv
+.venv/Scripts/activate   # Windows
+# source .venv/bin/activate  # macOS/Linux
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
+
+### Available make commands
+
+| Command | Description |
+|---------|-------------|
+| `make setup` | Create `.venv` and install all dependencies |
+| `make dev` | Start server with auto-reload |
+| `make run` | Start server (production mode) |
+| `make test` | Run test suite |
+| `make clean` | Remove venv and cache files |
 
 ## Endpoints
 
