@@ -44,7 +44,10 @@ def create_customer(payload: CustomerCreate, db: Session = Depends(get_db)):
     db.add(customer)
     db.commit()
     db.refresh(customer)
+<<<<<<< Updated upstream
     # Return with tags
+=======
+>>>>>>> Stashed changes
     return db.query(Customer).options(joinedload(Customer.tags)).filter(Customer.id == customer.id).first()
 
 
@@ -71,8 +74,12 @@ def update_customer(
         setattr(customer, field, value)
     db.commit()
     db.refresh(customer)
+<<<<<<< Updated upstream
     # Return with tags
     return db.query(Customer).options(joinedload(Customer.tags)).filter(Customer.id == customer.id).first()
+=======
+    return db.query(Customer).options(joinedload(Customer.tags)).filter(Customer.id == customer_id).first()
+>>>>>>> Stashed changes
 
 
 @router.delete("/{customer_id}", status_code=204)
