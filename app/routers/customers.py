@@ -62,6 +62,10 @@ def update_customer(
     customer = db.query(Customer).filter(Customer.id == customer_id).first()
     if not customer:
         raise HTTPException(status_code=404, detail="Customer not found")
+    if payload.email and payload.email != customer.email:
+        conflict = db.query(Customer).filter(Customer.email == payload.email).first()
+        if conflict:
+            raise HTTPException(status_code=400, detail="Email already registered")
     for field, value in payload.model_dump(exclude_unset=True).items():
         setattr(customer, field, value)
     db.commit()
@@ -78,17 +82,28 @@ def delete_customer(customer_id: int, db: Session = Depends(get_db)):
     db.commit()
 
 
-@router.get("/export/csv")
-def export_csv(db: Session = Depends(get_db)):
-    customers = db.query(Customer).all()
+def csv_generator(customers):
     output = io.StringIO()
     writer = csv.writer(output)
+    
+    # Header
     writer.writerow(["id", "first_name", "last_name", "email", "phone", "company", "status", "notes", "created_at"])
+    yield output.getvalue()
+    output.seek(0)
+    output.truncate(0)
+    
     for c in customers:
         writer.writerow([c.id, c.first_name, c.last_name, c.email, c.phone, c.company, c.status, c.notes, c.created_at])
-    output.seek(0)
+        yield output.getvalue()
+        output.seek(0)
+        output.truncate(0)
+
+
+@router.get("/export/csv")
+def export_csv(db: Session = Depends(get_db)):
+    customers = db.query(Customer).yield_per(100)
     return StreamingResponse(
-        iter([output.getvalue()]),
+        csv_generator(customers),
         media_type="text/csv",
         headers={"Content-Disposition": "attachment; filename=customers.csv"},
     )
