@@ -1,17 +1,17 @@
-# CRM POC
+# Simple CRM
 
-**Proof of Concept: Customer Management System**
+**Proof of Concept: Multi-Agent Customer Management System**
 
 > This project is an experiment in **multi-agent AI collaboration** — built jointly by Claude (Anthropic) and Gemini (Google) to demonstrate that AI agents from different providers can work together on a shared codebase, coordinate via a common Kanban board, and deliver a functional product.
 
-The chosen domain is a simple Customer Relationship Manager (CRM), kept intentionally lightweight so the focus stays on the collaboration process rather than domain complexity.
+Simple CRM is a lightweight, relationship-focused tool designed to manage contacts, tasks, and interaction history with a professional, modern interface.
 
 ## Goals
 
-- Demonstrate multi-agent teamwork across different AI systems
-- Build a working API with real CRUD operations and data persistence
-- Show a clean, extensible codebase that human developers can take over and extend
-- Use GitHub (repo + Projects Kanban) as the shared coordination layer between agents
+- **Agentic Collaboration:** Demonstrate seamless teamwork between different AI systems.
+- **Functional Prototype:** Deliver a working system with a React frontend and FastAPI backend.
+- **Relationship Intelligence:** Track every call, meeting, and note automatically.
+- **Task Lifecycle:** Manage workflows through a visual Kanban board with an automated audit trail.
 
 ## Multi-Agent Strategy: "The Fleet That Never Sleeps"
 
@@ -22,43 +22,29 @@ This project implements a **shared consciousness** architecture to coordinate mu
 - **Agent Roles:** Each agent has specific instructions (`GEMINI.md`, `CLAUDE.md`) optimizing for their unique strengths.
 - **Switchboard Manager:** The human developer acts as the context architect and final merge authority.
 
-### Coordination Layers
-
-| Document | Purpose |
-|----------|---------|
-| `AGENTS/PROJECT_GOAL.md` | The current sprint target (shared source of truth) |
-| `AGENTS/CONVENTIONS.md` | Shared coding law (naming, style, error handling) |
-| `crm-poc-architecture.md` | Master map of system architecture and data flows |
-| `GEMINI.md` / `CLAUDE.md` | Agent-specific CLI and Git workflow rules |
-
 ## Tech Stack
 
 | Layer | Choice |
 |-------|--------|
-| API | FastAPI (Python) |
-| Database | SQLite via SQLAlchemy |
-| Schema validation | Pydantic v2 |
-| Export | CSV (streaming) |
+| **Frontend** | React (Vite) + Vanilla CSS |
+| **API** | FastAPI (Python) |
+| **Database** | SQLite via SQLAlchemy |
+| **Validation** | Pydantic v2 |
+| **Coordination** | GitHub Projects (Kanban) |
+
+## Key Features
+
+- **Home Dashboard:** Dual-column view showing recent activities and active tasks.
+- **Contact Management:** Searchable, sortable list of contacts with location tracking and tagging.
+- **Task Kanban:** Visual board to move tasks between "To Do", "In Progress", and "Closed".
+- **Auto-Audit Trail:** Every task status change automatically logs a note in the interaction history.
+- **Log Activity:** Dedicated interface to capture calls, meetings, and notes for any contact.
 
 ## Quick Start
 
+### 1. Backend (FastAPI)
 ```bash
-# Clone
-git clone https://github.com/UrsushoribilisMusic/crm-poc.git
-cd crm-poc
-
-# Create virtual environment and install dependencies
-make setup
-
-# Run with auto-reload (development)
-make dev
-```
-
-API docs (Swagger UI): http://localhost:8000/docs
-
-### Manual setup (without make)
-
-```bash
+cd customer-mgmt
 python -m venv .venv
 .venv/Scripts/activate   # Windows
 # source .venv/bin/activate  # macOS/Linux
@@ -66,50 +52,34 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-### Available make commands
+### 2. Frontend (Vite)
+```bash
+cd customer-mgmt/frontend
+npm install
+npm run dev
+```
 
-| Command | Description |
-|---------|-------------|
-| `make setup` | Create `.venv` and install all dependencies |
-| `make dev` | Start server with auto-reload |
-| `make run` | Start server (production mode) |
-| `make test` | Run test suite |
-| `make clean` | Remove venv and cache files |
-
-## Endpoints
-
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/customers` | List all customers (supports `?search=` and `?status=`) |
-| POST | `/customers` | Create a customer |
-| GET | `/customers/{id}` | Get one customer |
-| PATCH | `/customers/{id}` | Update a customer |
-| DELETE | `/customers/{id}` | Delete a customer |
-| GET | `/customers/export/csv` | Export all customers as CSV |
-| GET | `/health` | Health check |
-
-## Data
-
-- **Database**: `data/crm.db` (SQLite, auto-created on first run, git-ignored)
-- **CSV exports**: `exports/` folder (git-ignored)
+The CRM will be available at **http://localhost:5173**.
 
 ## Project Structure
 
 ```
-crm-poc/
-├── app/
-│   ├── main.py          # FastAPI app + startup
-│   ├── database.py      # SQLite connection
-│   ├── models.py        # SQLAlchemy ORM models
-│   ├── routers/
-│   │   └── customers.py # CRUD + CSV export endpoints
-│   └── schemas/
-│       └── customer.py  # Pydantic request/response schemas
-├── data/                # SQLite DB lives here (git-ignored)
-├── exports/             # CSV exports (git-ignored)
-└── requirements.txt
+customer-mgmt/
+├── app/                 # FastAPI Backend
+│   ├── main.py          # Entry point & Router registration
+│   ├── models.py        # SQLAlchemy Models (Contact, Task, Activity, Tag)
+│   ├── routers/         # API Endpoints
+│   └── schemas/         # Pydantic Validation
+├── frontend/            # React Frontend
+│   ├── src/
+│   │   ├── components/  # UI Components (Modals, Lists)
+│   │   └── api/         # API Client Utilities
+│   └── index.html       # SPA Entry Point
+├── AGENTS/              # Multi-Agent Coordination Hub
+├── data/                # SQLite Database
+└── DEPLOY.md            # Martin's Deployment Guide
 ```
 
 ## Kanban Board
 
-Task coordination between agents: https://github.com/users/UrsushoribilisMusic/projects/2
+Task coordination history: https://github.com/users/UrsushoribilisMusic/projects/2
