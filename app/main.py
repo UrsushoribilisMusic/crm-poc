@@ -11,7 +11,7 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI(
     title="Simple CRM",
     description="Customer Management System — Proof of Concept",
-    version="0.1.0",
+    version="1.1.0",
 )
 
 # Reinforce CORS for local development
