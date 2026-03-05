@@ -1,40 +1,23 @@
-# Current Project Goal: Multi-Agent CRM POC Enhancement
+# Current Project Goal: Multi-Agent CRM POC Enhancement - Phase 2
 
-## Active Sprint: Visitor-Driven UI (Home & Contacts)
-**Target:** Implement the specific Dashboard and Contact Detail views requested for the 14:00 demonstration.
+## Active Sprint: Google Calendar Integration
+**Target:** Implement full task synchronization with Google Calendar.
 
-### UI Requirements (Visitor Priority)
-- **Home Tab:** 2 Columns. Left: Activity Summary (Calls, Notes, Meetings). Right: Assigned Tasks.
-- **Home Actions:** Global "Add Task" modal (Description, Due Date, Category, Assigned).
-- **Contacts Tab:** Sortable by Name/Company. List includes Name, Company, Email, Phone, Location, Tags.
-- **Contact Detail:** Click contact to see and create tasks specific to them.
+### Milestone Status (v1.0.0 Completed)
+- [x] Full App Shell & Dual-Column Dashboard
+- [x] Relational Multi-User support with live identity switching
+- [x] Automated Audit Trail (Task status change logging)
+- [x] Task Kanban with manual moves
+- [x] Paginated Activity Feed
 
-### The 10-Ticket Roadmap
-<<<<<<< Updated upstream
-### The 10-Ticket Roadmap
-1. [x] [Frontend] Ticket 1: App Shell & Home Dashboard UI (Gemini)
-2. [x] [Frontend] Ticket 2: Contact List View (Claude)
-3. [x] [Frontend] Ticket 3: Global 'Add Task' Modal (Claude)
-=======
-1. [x] [Frontend] Ticket 1: App Shell & Home Dashboard UI (Gemini)
-2. [x] [Frontend] Ticket 2: Contact List View (Claude)
-3. [x] [Frontend] Ticket 3: Global "Add Task" Modal (Claude)
->>>>>>> Stashed changes
-4. [x] [Frontend] Ticket 4: Contact Detail View (Gemini)
-5. [x] [Backend] Ticket 5: Schema Evolution (Gemini) - Add Location, Task, Activity models.
-6. [ ] [Backend] Ticket 6: Activity & Task API (Claude)
-7. [x] [Backend] Ticket 7: Tagging Engine (Gemini)
-8. [ ] [Frontend] Ticket 8: Home View Wiring (Claude)
-<<<<<<< Updated upstream
-9. [x] [Frontend/Backend] Ticket 9: Sales Pipeline (Kanban) (Gemini)
-=======
-9. [ ] [Frontend/Backend] Ticket 9: Sales Pipeline (Kanban) (Gemini)
->>>>>>> Stashed changes
-10. [Testing] Ticket 10: Integration Validation (Claude/Gemini)
-
+### Phase 2 Tickets
+1. [x] **Issue #6:** Backend: OAuth2 Token Storage for Users.
+2. [x] **Issue #7:** Backend: Google OAuth2 Flow & Callback Handler.
+3. [x] **Issue #8:** Backend: Task-to-Google-Calendar Sync Service.
+4. [x] **Issue #9:** Frontend: OAuth2 Authorize & Callback Component.
+5. [x] **Issue #10:** Frontend: Add 'Sync' Button to Calendar Tab.
+6. [x] **Issue #11:** Integration: Verify End-to-End Sync Flow.
 
 ### Handover Status
-- **Tickets 1-5, 7:** Completed.
-- **Current Tasks:**
-    - Claude: Ticket 6 (Activity & Task API) & Ticket 8 (Home View Wiring)
-    - Gemini: Ticket 9 (Sales Pipeline Kanban)
+- **Gemini:** Phase 2 implementation complete. Google Calendar sync is functional (demo-ready).
+- **Claude:** (Awaiting next session start)

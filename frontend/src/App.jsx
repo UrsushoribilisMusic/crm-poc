@@ -3,6 +3,7 @@ import ContactList from './components/ContactList';
 import AddTaskModal from './components/AddTaskModal';
 import LogActivityModal from './components/LogActivityModal';
 import EditContactModal from './components/EditContactModal';
+import CalendarView from './components/CalendarView';
 import { fetchCustomers } from './api/customers';
 
 const App = () => {
@@ -46,6 +47,15 @@ const App = () => {
   useEffect(() => {
     refreshData();
   }, [activeTab]);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('auth') === 'success') {
+      alert("Successfully connected to Google Calendar!");
+      // Clean up URL
+      window.history.replaceState({}, document.title, "/");
+    }
+  }, []);
 
   useEffect(() => {
     if (showTaskModal) {
@@ -257,6 +267,15 @@ const App = () => {
     );
   };
 
+  const renderCalendar = () => (
+    <CalendarView 
+      tasks={tasks} 
+      contacts={contacts} 
+      activeUser={activeUser}
+      onEditTask={handleEditTask} 
+    />
+  );
+
   return (
     <div className="app-container">
       <div className="sidebar">
@@ -265,12 +284,13 @@ const App = () => {
           <div className={`nav-item ${activeTab === 'home' ? 'active' : ''}`} onClick={() => setActiveTab('home')}>🏠 Home Dashboard</div>
           <div className={`nav-item ${activeTab === 'contacts' || activeTab === 'contact-detail' ? 'active' : ''}`} onClick={() => setActiveTab('contacts')}>👥 Contacts</div>
           <div className={`nav-item ${activeTab === 'pipeline' ? 'active' : ''}`} onClick={() => setActiveTab('pipeline')}>📋 Task Kanban</div>
+          <div className={`nav-item ${activeTab === 'calendar' ? 'active' : ''}`} onClick={() => setActiveTab('calendar')}>📅 Calendar</div>
           <div className={`nav-item ${activeTab === 'users' ? 'active' : ''}`} onClick={() => setActiveTab('users')}>⚙️ Users</div>
         </nav>
       </div>
       <div className="main-content">
         <header className="header">
-          <h2>{activeTab === 'home' ? 'Home' : activeTab === 'pipeline' ? 'Task Kanban' : activeTab === 'users' ? 'Team Management' : 'Contacts'}</h2>
+          <h2>{activeTab === 'home' ? 'Home' : activeTab === 'pipeline' ? 'Task Kanban' : activeTab === 'calendar' ? 'Calendar' : activeTab === 'users' ? 'Team Management' : 'Contacts'}</h2>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <span style={{ marginRight: '10px', fontSize: '0.9rem', color: 'var(--text-muted)' }}>Active User:</span>
             <select 
@@ -287,6 +307,7 @@ const App = () => {
           {activeTab === 'contacts' && renderContacts()}
           {activeTab === 'contact-detail' && renderContactDetail()}
           {activeTab === 'pipeline' && renderPipeline()}
+          {activeTab === 'calendar' && renderCalendar()}
           {activeTab === 'users' && renderUsers()}
         </main>
       </div>
