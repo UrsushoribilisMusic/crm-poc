@@ -1,4 +1,5 @@
-from typing import List, Optional
+from collections import defaultdict
+from typing import Dict, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
@@ -8,6 +9,30 @@ from ..models import Task, Activity
 from ..schemas.interaction import TaskCreate, TaskOut, TaskUpdate
 
 router = APIRouter(prefix="/tasks", tags=["tasks"])
+
+
+@router.get("/calendar", response_model=Dict[str, List[TaskOut]])
+def get_calendar_tasks(
+    year: int = Query(...),
+    month: int = Query(...),
+    db: Session = Depends(get_db),
+):
+    """Return tasks grouped by due_date (YYYY-MM-DD) for the given month."""
+    from datetime import date
+    import calendar
+    first_day = date(year, month, 1)
+    last_day = date(year, month, calendar.monthrange(year, month)[1])
+    tasks = (
+        db.query(Task)
+        .filter(Task.due_date >= first_day.isoformat(), Task.due_date <= last_day.isoformat() + "T23:59:59")
+        .all()
+    )
+    grouped: Dict[str, list] = defaultdict(list)
+    for task in tasks:
+        if task.due_date:
+            day_key = task.due_date[:10] if isinstance(task.due_date, str) else task.due_date.strftime("%Y-%m-%d")
+            grouped[day_key].append(task)
+    return dict(grouped)
 
 
 @router.get("/", response_model=List[TaskOut])
