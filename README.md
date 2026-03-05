@@ -37,6 +37,8 @@ This project implements a **shared consciousness** architecture to coordinate mu
 - **Home Dashboard:** Dual-column view showing recent activities and active tasks.
 - **Contact Management:** Searchable, sortable list of contacts with location tracking and tagging.
 - **Task Kanban:** Visual board to move tasks between "To Do", "In Progress", and "Closed".
+- **Calendar View:** Monthly grid view showing tasks and activities by due date.
+- **Google Calendar Integration:** One-click task synchronization via OAuth2.
 - **Auto-Audit Trail:** Every task status change automatically logs a note in the interaction history.
 - **Log Activity:** Dedicated interface to capture calls, meetings, and notes for any contact.
 

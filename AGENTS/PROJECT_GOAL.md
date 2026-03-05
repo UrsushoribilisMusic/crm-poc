@@ -1,23 +1,17 @@
-# Current Project Goal: Multi-Agent CRM POC Enhancement - Phase 2
+# Current Project Goal: Multi-Agent CRM POC Enhancement - Phase 3
 
-## Active Sprint: Google Calendar Integration
-**Target:** Implement full task synchronization with Google Calendar.
+## Active Sprint: Sales Analytics & Automation
+**Target:** Implement data-driven insights and automated communication.
 
-### Milestone Status (v1.0.0 Completed)
-- [x] Full App Shell & Dual-Column Dashboard
-- [x] Relational Multi-User support with live identity switching
-- [x] Automated Audit Trail (Task status change logging)
-- [x] Task Kanban with manual moves
-- [x] Paginated Activity Feed
+### Milestone Status
+- [x] **v1.0.0:** App Shell, Kanban, Multi-User, Audit Trail.
+- [x] **v1.1.0:** Google Calendar Integration & Interactive Calendar Tab.
 
-### Phase 2 Tickets
-1. [x] **Issue #6:** Backend: OAuth2 Token Storage for Users.
-2. [x] **Issue #7:** Backend: Google OAuth2 Flow & Callback Handler.
-3. [x] **Issue #8:** Backend: Task-to-Google-Calendar Sync Service.
-4. [x] **Issue #9:** Frontend: OAuth2 Authorize & Callback Component.
-5. [x] **Issue #10:** Frontend: Add 'Sync' Button to Calendar Tab.
-6. [x] **Issue #11:** Integration: Verify End-to-End Sync Flow.
+### Phase 3 Targets (Proposed)
+1. [ ] **Feature A:** Sales Pipeline Analytics (Conversion rates, Deal velocity).
+2. [ ] **Feature B:** Automated Email Follow-ups (Template system + SMTP).
+3. [ ] **Feature C:** Customer Lifetime Value (CLV) Calculation.
 
 ### Handover Status
-- **Gemini:** Phase 2 implementation complete. Google Calendar sync is functional (demo-ready).
+- **Gemini:** Delivered v1.1.0. Architecture and README updated. Ready for Phase 3 planning.
 - **Claude:** (Awaiting next session start)

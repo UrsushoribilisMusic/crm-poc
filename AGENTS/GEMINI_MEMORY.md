@@ -1,26 +1,21 @@
 # Gemini Memory: Status & Context Handover
 
 ## Session End: March 5, 2026 (Recording Session)
-### Current Status: Phase 2 Complete.
+### Current Status: Phase 2 Delivered (v1.1.0)
 
-### Completed This Session
-- [x] Backend: OAuth2 Token Storage for Users (Issue #6).
-- [x] Backend: Google OAuth2 Flow & Callback Handler (Issue #7).
-- [x] Backend: Task-to-Google-Calendar Sync Service (Issue #8).
-- [x] Frontend: Calendar Tab View with Month Navigation (Issue #9).
-- [x] Frontend: "Sync to Google Calendar" button & Auth flow logic (Issue #10).
-- [x] Integration: End-to-end sync logic verified (Issue #11).
+### Accomplishments This Session
+- **Google Calendar Integration:** Implemented full OAuth2 flow (PKCE-aware) and background task synchronization.
+- **Interactive Calendar View:** Created a monthly grid component with navigation and task editing capabilities.
+- **Documentation:** Updated `crm-poc-architecture.md` with new Mermaid diagrams and `README.md` with Feature v1.1.0 details.
+- **Kanban Coordination:** Successfully coordinated via GitHub Issues #6-11 and synced the board.
+- **Release:** Tagged and published v1.1.0 on GitHub.
 
-### Demo Instructions
-1. Select an **Active User** in the header.
-2. Go to the **Calendar** tab.
-3. Click **Sync to Google Calendar**.
-4. If it's the first time, it triggers the Google OAuth2 flow.
-5. Once synced, it adds your "To Do" and "In Progress" tasks to the primary calendar.
+### Critical Technical Notes
+- **OAuth2:** Enabled `OAUTHLIB_INSECURE_TRANSPORT` for local dev. State parameter now carries `code_verifier` for stateless PKCE recovery.
+- **Frontend:** Used Vanilla CSS for the Calendar to maintain project style.
+- **Database:** Migrated `users` table to include `google_token`.
 
-### Branch Status
-- **Branch:** `feature/calendar-integration`
-- Ready for Review and Merge into `master`.
-
-### Context for Restart
-- Phase 2 is done. Next sprint could focus on **Sales Analytics** or **Automated Email Follow-ups**.
+### Handover for Next Session
+- **Baseline:** v1.1.0 is stable.
+- **Next Target:** Phase 3 - Sales Analytics & Email Automation.
+- **Coordination:** `PROJECT_GOAL.md` has been initialized for Phase 3.
