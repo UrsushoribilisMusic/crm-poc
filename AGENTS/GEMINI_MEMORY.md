@@ -1,19 +1,21 @@
 # Gemini Memory: Status & Context Handover
 
-## Last Active Session: March 2, 2026 (14:15)
-**Current Focus:** Implementing Visitor-Ready UI Layout.
+## Session End: March 5, 2026 (Recording Session)
+### Current Status: Phase 2 Delivered (v1.1.0)
 
-### Completed This Session
-- [x] Stored all 10 tickets in GitHub Projects Kanban (`projects/2`).
-- [x] Refined roadmap based on Martin's specific UI requests (Dashboard Columns + Task/Contact Flow).
+### Accomplishments This Session
+- **Google Calendar Integration:** Implemented full OAuth2 flow (PKCE-aware) and background task synchronization.
+- **Interactive Calendar View:** Created a monthly grid component with navigation and task editing capabilities.
+- **Documentation:** Updated `crm-poc-architecture.md` with new Mermaid diagrams and `README.md` with Feature v1.1.0 details.
+- **Kanban Coordination:** Successfully coordinated via GitHub Issues #6-11 and synced the board.
+- **Release:** Tagged and published v1.1.0 on GitHub.
 
-### Next Session Strategy (Restart with `gemini -r latest --yes`)
-1. **Ticket 1 Execution:** 
-   - Setup Vite + React + Vanilla CSS.
-   - Create the App Shell with "Home" and "Contacts" tabs.
-   - Design the Dashboard with the dual-column layout (Activities left, Tasks right).
-   - Use CSS Grid/Flexbox for a clean, modern look.
+### Critical Technical Notes
+- **OAuth2:** Enabled `OAUTHLIB_INSECURE_TRANSPORT` for local dev. State parameter now carries `code_verifier` for stateless PKCE recovery.
+- **Frontend:** Used Vanilla CSS for the Calendar to maintain project style.
+- **Database:** Migrated `users` table to include `google_token`.
 
-### Context for Restart
-- **Non-Interactive Mode:** Ready for autonomous execution.
-- **Visitor Present:** Focus on high-signal UI first. Use mock components where backend is pending.
+### Handover for Next Session
+- **Baseline:** v1.1.0 is stable.
+- **Next Target:** Phase 3 - Sales Analytics & Email Automation.
+- **Coordination:** `PROJECT_GOAL.md` has been initialized for Phase 3.

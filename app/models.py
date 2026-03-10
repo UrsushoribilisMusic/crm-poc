@@ -12,6 +12,21 @@ customer_tags = Table(
 )
 
 
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    full_name = Column(String(100), nullable=False)
+    email = Column(String(255), unique=True, index=True, nullable=False)
+    role = Column(String(50), default="User")  # Admin, User
+    google_token = Column(Text, nullable=True)  # JSON blob for OAuth tokens
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    # Relationships
+    tasks = relationship("Task", back_populates="assignee")
+    activities = relationship("Activity", back_populates="actor")
+
+
 class Customer(Base):
     __tablename__ = "customers"
 
@@ -48,16 +63,19 @@ class Task(Base):
     __tablename__ = "tasks"
 
     id = Column(Integer, primary_key=True, index=True)
-    customer_id = Column(Integer, ForeignKey("customers.id"), nullable=True) # Optional link to customer
+    customer_id = Column(Integer, ForeignKey("customers.id"), nullable=True)
+    assigned_to_id = Column(Integer, ForeignKey("users.id"), nullable=True)
     description = Column(String(255), nullable=False)
     due_date = Column(DateTime(timezone=True))
-    category = Column(String(50)) # Call, Meeting, Follow up
+    category = Column(String(50))  # Call, Meeting, Follow up
     assigned_to = Column(String(100))
-    completed = Column(Integer, default=0) # 0 for false, 1 for true
+    status = Column(String(50), default="To Do")  # To Do, In Progress, Closed
+    completed = Column(Integer, default=0)  # 0 for false, 1 for true
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     # Relationships
     customer = relationship("Customer", back_populates="tasks")
+    assignee = relationship("User", back_populates="tasks")
 
 
 class Activity(Base):
@@ -65,13 +83,15 @@ class Activity(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     customer_id = Column(Integer, ForeignKey("customers.id"), nullable=False)
-    type = Column(String(50), nullable=False) # Call, Note, Meeting
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=True)
+    type = Column(String(50), nullable=False)  # Call, Note, Meeting
     summary = Column(String(255))
     details = Column(Text)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     # Relationships
     customer = relationship("Customer", back_populates="activities")
+    actor = relationship("User", back_populates="activities")
 
 
 class Opportunity(Base):
@@ -81,7 +101,7 @@ class Opportunity(Base):
     customer_id = Column(Integer, ForeignKey("customers.id"), nullable=False)
     name = Column(String(200), nullable=False)
     value = Column(Integer, default=0)
-    stage = Column(String(50), default="Lead") # Lead, Qualified, Proposal, Negotiation, Won, Lost
+    stage = Column(String(50), default="Lead")  # Lead, Qualified, Proposal, Negotiation, Won, Lost
     expected_close_date = Column(DateTime(timezone=True))
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 

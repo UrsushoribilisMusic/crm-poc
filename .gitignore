@@ -13,6 +13,10 @@ build/
 data/*.db
 data/*.db-shm
 data/*.db-wal
+crm.db
+
+# Secrets
+credentials.json
 
 # Exports (generated files)
 exports/*.csv

@@ -1,26 +1,17 @@
-# Current Project Goal: Multi-Agent CRM POC Enhancement
+# Current Project Goal: Multi-Agent CRM POC Enhancement - Phase 3
 
-## Active Sprint: Visitor-Driven UI (Home & Contacts)
-**Target:** Implement the specific Dashboard and Contact Detail views requested for the 14:00 demonstration.
+## Active Sprint: Sales Analytics & Automation
+**Target:** Implement data-driven insights and automated communication.
 
-### UI Requirements (Visitor Priority)
-- **Home Tab:** 2 Columns. Left: Activity Summary (Calls, Notes, Meetings). Right: Assigned Tasks.
-- **Home Actions:** Global "Add Task" modal (Description, Due Date, Category, Assigned).
-- **Contacts Tab:** Sortable by Name/Company. List includes Name, Company, Email, Phone, Location, Tags.
-- **Contact Detail:** Click contact to see and create tasks specific to them.
+### Milestone Status
+- [x] **v1.0.0:** App Shell, Kanban, Multi-User, Audit Trail.
+- [x] **v1.1.0:** Google Calendar Integration & Interactive Calendar Tab.
 
-### The 10-Ticket Roadmap
-1. [Frontend] Ticket 1: App Shell & Home Dashboard UI (Gemini)
-2. [Frontend] Ticket 2: Contact List View (Claude)
-3. [Frontend] Ticket 3: Global "Add Task" Modal (Claude)
-4. [Frontend] Ticket 4: Contact Detail View (Gemini)
-5. [Backend] Ticket 5: Schema Evolution (Gemini) - Add Location, Task, Activity models.
-6. [Backend] Ticket 6: Activity & Task API (Claude)
-7. [Backend] Ticket 7: Tagging Engine (Gemini)
-8. [Frontend] Ticket 8: Home View Wiring (Claude)
-9. [Frontend/Backend] Ticket 9: Sales Pipeline (Kanban) (Gemini)
-10. [Testing] Ticket 10: Integration Validation (Claude/Gemini)
+### Phase 3 Targets (Proposed)
+1. [ ] **Feature A:** Sales Pipeline Analytics (Conversion rates, Deal velocity).
+2. [ ] **Feature B:** Automated Email Follow-ups (Template system + SMTP).
+3. [ ] **Feature C:** Customer Lifetime Value (CLV) Calculation.
 
 ### Handover Status
-- **Plan Locked:** Specific UI layout for Home and Contacts defined.
-- **Next Step:** Gemini to start Ticket 1 (Frontend Shell & Dashboard Layout).
+- **Gemini:** Delivered v1.1.0. Architecture and README updated. Ready for Phase 3 planning.
+- **Claude:** (Awaiting next session start)
