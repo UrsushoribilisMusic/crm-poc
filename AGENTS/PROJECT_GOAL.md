@@ -1,17 +1,17 @@
-# Current Project Goal: Multi-Agent CRM POC Enhancement
+# Current Project Goal: Multi-Agent CRM POC Enhancement - Phase 3
 
-## Active Sprint: Foundation & Standardization
-**Target:** Finalize the multi-agent coordination structure and prepare for the next feature wave.
+## Active Sprint: Sales Analytics & Automation
+**Target:** Implement data-driven insights and automated communication.
 
-### Current Tasks
-1. [x] Initial FastAPI Scaffolding (Claude)
-2. [x] Multi-Agent Architecture Documentation (Gemini)
-3. [x] Agent files: CLAUDE.md, AGENTS/CLAUDE_INSTRUCTIONS.md, AGENTS/CLAUDE_MEMORY.md (Claude)
-4. [ ] Implement pytest suite for CRUD operations
-5. [ ] Fix PATCH email uniqueness bug
-6. [ ] Refactor CSV export to use true streaming
-7. [ ] Add `Interactions` model for customer activity tracking
+### Milestone Status
+- [x] **v1.0.0:** App Shell, Kanban, Multi-User, Audit Trail.
+- [x] **v1.1.0:** Google Calendar Integration & Interactive Calendar Tab.
+
+### Phase 3 Targets (Proposed)
+1. [ ] **Feature A:** Sales Pipeline Analytics (Conversion rates, Deal velocity).
+2. [ ] **Feature B:** Automated Email Follow-ups (Template system + SMTP).
+3. [ ] **Feature C:** Customer Lifetime Value (CLV) Calculation.
 
 ### Handover Status
-- **Claude:** Scaffolding done. Agent docs added. PATCH email bug flagged — ticket pending.
-- **Gemini:** Fleet architecture documentation complete. Next: pytest suite.
+- **Gemini:** Delivered v1.1.0. Architecture and README updated. Ready for Phase 3 planning.
+- **Claude:** (Awaiting next session start)
