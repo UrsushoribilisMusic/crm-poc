@@ -1,38 +1,13 @@
-from collections import defaultdict
-from typing import Dict, List, Optional
+from typing import List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from ..database import get_db
-from ..models import Task, Activity
-from ..schemas.interaction import TaskCreate, TaskOut, TaskUpdate
+from ..models import Task
+from ..schemas.interaction import TaskCreate, TaskOut
 
 router = APIRouter(prefix="/tasks", tags=["tasks"])
-
-
-@router.get("/calendar", response_model=Dict[str, List[TaskOut]])
-def get_calendar_tasks(
-    year: int = Query(...),
-    month: int = Query(...),
-    db: Session = Depends(get_db),
-):
-    """Return tasks grouped by due_date (YYYY-MM-DD) for the given month."""
-    from datetime import date
-    import calendar
-    first_day = date(year, month, 1)
-    last_day = date(year, month, calendar.monthrange(year, month)[1])
-    tasks = (
-        db.query(Task)
-        .filter(Task.due_date >= first_day.isoformat(), Task.due_date <= last_day.isoformat() + "T23:59:59")
-        .all()
-    )
-    grouped: Dict[str, list] = defaultdict(list)
-    for task in tasks:
-        if task.due_date:
-            day_key = task.due_date[:10] if isinstance(task.due_date, str) else task.due_date.strftime("%Y-%m-%d")
-            grouped[day_key].append(task)
-    return dict(grouped)
 
 
 @router.get("/", response_model=List[TaskOut])
@@ -67,34 +42,12 @@ def get_task(task_id: int, db: Session = Depends(get_db)):
 
 
 @router.patch("/{task_id}", response_model=TaskOut)
-def update_task(task_id: int, payload: TaskUpdate, db: Session = Depends(get_db)):
+def update_task(task_id: int, payload: TaskCreate, db: Session = Depends(get_db)):
     task = db.query(Task).filter(Task.id == task_id).first()
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
-    
-    data = payload.model_dump(exclude_unset=True)
-    
-    # Automatic Activity Logging if status changed
-    if "status" in data and data["status"] != task.status:
-        if task.customer_id:
-            activity = Activity(
-                customer_id=task.customer_id,
-                user_id=task.assigned_to_id, # Linked actor
-                type="Note",
-                summary=f"Task status changed to {data['status']}",
-                details=f"Task '{task.description}' was moved from '{task.status}' to '{data['status']}'."
-            )
-            db.add(activity)
-
-    for field, value in data.items():
+    for field, value in payload.model_dump(exclude_unset=True).items():
         setattr(task, field, value)
-    
-    # Sync 'completed' with 'Closed' status
-    if task.status == "Closed":
-        task.completed = 1
-    else:
-        task.completed = 0
-
     db.commit()
     db.refresh(task)
     return task
@@ -106,7 +59,6 @@ def complete_task(task_id: int, db: Session = Depends(get_db)):
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
     task.completed = 1
-    task.status = "Closed"
     db.commit()
     db.refresh(task)
     return task

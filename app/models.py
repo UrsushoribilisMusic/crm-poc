@@ -18,8 +18,8 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     full_name = Column(String(100), nullable=False)
     email = Column(String(255), unique=True, index=True, nullable=False)
-    role = Column(String(50), default="User") # Admin, User
-    google_token = Column(Text, nullable=True) # JSON blob for OAuth tokens
+    role = Column(String(50), default="User")  # Admin, User
+    google_token = Column(Text, nullable=True)  # JSON blob for OAuth tokens
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     # Relationships
@@ -64,12 +64,13 @@ class Task(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     customer_id = Column(Integer, ForeignKey("customers.id"), nullable=True)
-    assigned_to_id = Column(Integer, ForeignKey("users.id"), nullable=True) # Linked to User
+    assigned_to_id = Column(Integer, ForeignKey("users.id"), nullable=True)
     description = Column(String(255), nullable=False)
     due_date = Column(DateTime(timezone=True))
-    category = Column(String(50)) # Call, Meeting, Follow up
-    status = Column(String(50), default="To Do") # To Do, In Progress, Closed
-    completed = Column(Integer, default=0)
+    category = Column(String(50))  # Call, Meeting, Follow up
+    assigned_to = Column(String(100))
+    status = Column(String(50), default="To Do")  # To Do, In Progress, Closed
+    completed = Column(Integer, default=0)  # 0 for false, 1 for true
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     # Relationships
@@ -82,8 +83,8 @@ class Activity(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     customer_id = Column(Integer, ForeignKey("customers.id"), nullable=False)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=True) # The actor
-    type = Column(String(50), nullable=False) # Call, Note, Meeting
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=True)
+    type = Column(String(50), nullable=False)  # Call, Note, Meeting
     summary = Column(String(255))
     details = Column(Text)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
@@ -100,7 +101,7 @@ class Opportunity(Base):
     customer_id = Column(Integer, ForeignKey("customers.id"), nullable=False)
     name = Column(String(200), nullable=False)
     value = Column(Integer, default=0)
-    stage = Column(String(50), default="Lead")
+    stage = Column(String(50), default="Lead")  # Lead, Qualified, Proposal, Negotiation, Won, Lost
     expected_close_date = Column(DateTime(timezone=True))
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
