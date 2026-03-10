@@ -1,0 +1,134 @@
+.calendar-container {
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendar-nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.calendar-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-main);
+  min-width: 150px;
+  text-align: center;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  background-color: var(--border);
+  border: 1px solid var(--border);
+}
+
+.calendar-day-header {
+  background-color: #f8f9fa;
+  padding: 10px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.calendar-day {
+  background-color: white;
+  min-height: 100px;
+  padding: 8px;
+  position: relative;
+}
+
+.calendar-day.empty {
+  background-color: #fcfcfc;
+}
+
+.day-number {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 5px;
+}
+
+.day-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.calendar-task {
+  font-size: 0.7rem;
+  padding: 4px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-left: 3px solid transparent;
+  transition: transform 0.1s ease;
+}
+
+.calendar-task:hover {
+  transform: scale(1.02);
+  filter: brightness(0.95);
+}
+
+.status-to-do {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  border-left-color: #1976d2;
+}
+
+.status-in-progress {
+  background-color: #fff8e1;
+  color: #f57c00;
+  border-left-color: #f57c00;
+}
+
+.status-closed {
+  background-color: #e8f5e9;
+  color: #388e3c;
+  border-left-color: #388e3c;
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.task-contact {
+  font-size: 0.6rem;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+.btn.loading {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.calendar-day.today {
+  background-color: #eff6ff;
+  outline: 2px solid #3b82f6;
+  outline-offset: -2px;
+}
+
+.calendar-day.today .day-number {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.task-overflow {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  padding: 2px 4px;
+  cursor: default;
+}
