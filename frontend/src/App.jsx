@@ -19,12 +19,18 @@ const App = () => {
   const [selectedTask, setSelectedTask] = useState(null);
   const [opportunities, setOpportunities] = useState([]);
   const [showEditContactModal, setShowEditContactModal] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    setSidebarOpen(false);
+  };
 
   const refreshData = async () => {
     console.log('Refreshing all data...');
     
     try {
-      const uRes = await fetch('/users/');
+      const uRes = await fetch('./api/users/');
       if (uRes.ok) {
         const uData = await uRes.json();
         setUsers(uData);
@@ -39,9 +45,9 @@ const App = () => {
     } catch (e) { console.error('Users fetch failed:', e); }
 
     fetchCustomers().then(setContacts).catch(e => console.error('Contacts fetch failed:', e));
-    fetch('/tasks/').then(res => res.ok ? res.json() : []).then(setTasks).catch(e => console.error('Tasks fetch failed:', e));
-    fetch('/activities/?limit=50').then(res => res.ok ? res.json() : []).then(setActivities).catch(e => console.error('Activities fetch failed:', e));
-    fetch('/opportunities/').then(res => res.ok ? res.json() : []).then(setOpportunities).catch(e => console.error('Opportunities fetch failed:', e));
+    fetch('./api/tasks/').then(res => res.ok ? res.json() : []).then(setTasks).catch(e => console.error('Tasks fetch failed:', e));
+    fetch('./api/activities/?limit=50').then(res => res.ok ? res.json() : []).then(setActivities).catch(e => console.error('Activities fetch failed:', e));
+    fetch('./api/opportunities/').then(res => res.ok ? res.json() : []).then(setOpportunities).catch(e => console.error('Opportunities fetch failed:', e));
   };
 
   useEffect(() => {
@@ -283,18 +289,27 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <div className="sidebar">
+      <button className="mobile-menu-btn" onClick={() => setSidebarOpen(!sidebarOpen)}>
+        {sidebarOpen ? '✕' : '☰'}
+      </button>
+
+      <div className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
           <img src="/crm/assets/icon.svg" alt="Fleet Hub" />
           <span>Fleet Hub</span>
         </div>
         <nav className="nav-menu">
-          <div className={`nav-item ${activeTab === 'home' ? 'active' : ''}`} onClick={() => setActiveTab('home')}>🏠 Home Dashboard</div>
-          <div className={`nav-item ${activeTab === 'contacts' || activeTab === 'contact-detail' ? 'active' : ''}`} onClick={() => setActiveTab('contacts')}>👥 Lead Discovery</div>
-          <div className={`nav-item ${activeTab === 'pipeline' ? 'active' : ''}`} onClick={() => setActiveTab('pipeline')}>📋 Sales Pipeline</div>
-          <div className={`nav-item ${activeTab === 'calendar' ? 'active' : ''}`} onClick={() => setActiveTab('calendar')}>📅 Content Calendar</div>
-          <div className={`nav-item ${activeTab === 'users' ? 'active' : ''}`} onClick={() => setActiveTab('users')}>⚙️ Fleet Access</div>
+          <div className={`nav-item ${activeTab === 'home' ? 'active' : ''}`} onClick={() => handleTabChange('home')}>🏠 Home Dashboard</div>
+          <div className={`nav-item ${activeTab === 'contacts' || activeTab === 'contact-detail' ? 'active' : ''}`} onClick={() => handleTabChange('contacts')}>👥 Lead Discovery</div>
+          <div className={`nav-item ${activeTab === 'pipeline' ? 'active' : ''}`} onClick={() => handleTabChange('pipeline')}>📋 Sales Pipeline</div>
+          <div className={`nav-item ${activeTab === 'calendar' ? 'active' : ''}`} onClick={() => handleTabChange('calendar')}>📅 Content Calendar</div>
+          <div className={`nav-item ${activeTab === 'users' ? 'active' : ''}`} onClick={() => handleTabChange('users')}>⚙️ Fleet Access</div>
         </nav>
+        <div style={{ marginTop: 'auto', padding: '1.5rem', borderTop: '1px solid var(--border)', textAlign: 'center' }}>
+          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+            © 2025 <a href="https://bigbearengineering.com" target="_blank" rel="noreferrer" style={{ color: 'var(--teal-bright)', textDecoration: 'none' }}>Big Bear Engineering GmbH</a>
+          </p>
+        </div>
       </div>
       <div className="main-content">
         <header className="header">
