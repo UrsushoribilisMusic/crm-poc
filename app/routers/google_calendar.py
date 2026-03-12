@@ -21,21 +21,38 @@ os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 SCOPES = ['https://www.googleapis.com/auth/calendar.events']
 CLIENT_SECRETS_FILE = "credentials.json"
 
-@router.get("/google-auth/{user_id}")
-async def google_auth(user_id: int, request: Request):
+def get_google_flow(user_id: int):
+    """Helper to initialize the OAuth flow from Vault env var or local file."""
+    creds_json = os.environ.get("GOOGLE_CREDENTIALS_JSON")
+    if creds_json:
+        # Load from environment variable (Vault Pattern)
+        import json
+        client_config = json.loads(creds_json)
+        return Flow.from_client_config(
+            client_config,
+            scopes=SCOPES,
+            redirect_uri="http://localhost:8000/google-auth-callback"
+        )
+
     if not os.path.exists(CLIENT_SECRETS_FILE):
-         raise HTTPException(status_code=500, detail="credentials.json missing on server.")
-    
-    flow = Flow.from_client_secrets_file(
+         raise HTTPException(status_code=500, detail="Google credentials missing (checked env and disk).")
+
+    return Flow.from_client_secrets_file(
         CLIENT_SECRETS_FILE,
         scopes=SCOPES,
         redirect_uri="http://localhost:8000/google-auth-callback"
     )
-    
-    authorization_url, _ = flow.authorization_url(
+
+@router.get("/google-auth/{user_id}")
+async def google_auth(user_id: int, request: Request):
+    flow = get_google_flow(user_id)
+    authorization_url, state = flow.authorization_url(
         access_type='offline',
-        include_granted_scopes='true'
+        include_granted_scopes='true',
+        prompt='consent'
     )
+    # ... rest of function
+
     
     # Store user_id AND code_verifier in state to retrieve them in callback
     state = json.dumps({
@@ -65,11 +82,7 @@ async def google_auth_callback(request: Request, db: Session = Depends(get_db)):
         user_id = state.get("user_id")
         code_verifier = state.get("code_verifier")
         
-        flow = Flow.from_client_secrets_file(
-            CLIENT_SECRETS_FILE,
-            scopes=SCOPES,
-            redirect_uri="http://localhost:8000/google-auth-callback"
-        )
+        flow = get_google_flow(user_id)
         
         # Use the verifier we saved in the state
         flow.fetch_token(code=code, code_verifier=code_verifier)

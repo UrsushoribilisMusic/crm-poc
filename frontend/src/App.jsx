@@ -50,6 +50,11 @@ const App = () => {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
+    const tabParam = urlParams.get('tab');
+    if (tabParam && ['home', 'contacts', 'pipeline', 'calendar', 'users'].includes(tabParam)) {
+      setActiveTab(tabParam);
+    }
+
     if (urlParams.get('auth') === 'success') {
       alert("Successfully connected to Google Calendar!");
       // Clean up URL
@@ -279,13 +284,16 @@ const App = () => {
   return (
     <div className="app-container">
       <div className="sidebar">
-        <div className="sidebar-header">Simple CRM</div>
+        <div className="sidebar-header">
+          <img src="/crm/assets/icon.svg" alt="Fleet Hub" />
+          <span>Fleet Hub</span>
+        </div>
         <nav className="nav-menu">
           <div className={`nav-item ${activeTab === 'home' ? 'active' : ''}`} onClick={() => setActiveTab('home')}>🏠 Home Dashboard</div>
-          <div className={`nav-item ${activeTab === 'contacts' || activeTab === 'contact-detail' ? 'active' : ''}`} onClick={() => setActiveTab('contacts')}>👥 Contacts</div>
-          <div className={`nav-item ${activeTab === 'pipeline' ? 'active' : ''}`} onClick={() => setActiveTab('pipeline')}>📋 Task Kanban</div>
-          <div className={`nav-item ${activeTab === 'calendar' ? 'active' : ''}`} onClick={() => setActiveTab('calendar')}>📅 Calendar</div>
-          <div className={`nav-item ${activeTab === 'users' ? 'active' : ''}`} onClick={() => setActiveTab('users')}>⚙️ Users</div>
+          <div className={`nav-item ${activeTab === 'contacts' || activeTab === 'contact-detail' ? 'active' : ''}`} onClick={() => setActiveTab('contacts')}>👥 Lead Discovery</div>
+          <div className={`nav-item ${activeTab === 'pipeline' ? 'active' : ''}`} onClick={() => setActiveTab('pipeline')}>📋 Sales Pipeline</div>
+          <div className={`nav-item ${activeTab === 'calendar' ? 'active' : ''}`} onClick={() => setActiveTab('calendar')}>📅 Content Calendar</div>
+          <div className={`nav-item ${activeTab === 'users' ? 'active' : ''}`} onClick={() => setActiveTab('users')}>⚙️ Fleet Access</div>
         </nav>
       </div>
       <div className="main-content">
