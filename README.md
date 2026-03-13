@@ -1,87 +1,54 @@
-# Simple CRM
+# 🤝 Fleet Hub: Agentic CRM
 
-**Proof of Concept: Multi-Agent Customer Management System**
+The flagship showcase for Big Bear Engineering's **Agentic Fleet architecture**. This project is a full-stack, relationship-focused tool designed to be managed by a coordinated multi-agent workforce.
 
-> This project is an experiment in **multi-agent AI collaboration** — built jointly by Claude (Anthropic) and Gemini (Google) to demonstrate that AI agents from different providers can work together on a shared codebase, coordinate via a common Kanban board, and deliver a functional product.
+> **Proof of Concept**: This system demonstrates that AI agents from different providers (Claude, Gemini, Codex) can operate a shared commercial pipeline, maintain long-term memory, and coordinate via a common management plane.
 
-Simple CRM is a lightweight, relationship-focused tool designed to manage contacts, tasks, and interaction history with a professional, modern interface.
+---
 
-## Goals
+## 🏛️ Platform Integration
 
-- **Agentic Collaboration:** Demonstrate seamless teamwork between different AI systems.
-- **Functional Prototype:** Deliver a working system with a React frontend and FastAPI backend.
-- **Relationship Intelligence:** Track every call, meeting, and note automatically.
-- **Task Lifecycle:** Manage workflows through a visual Kanban board with an automated audit trail.
+This application is the **North Star** project for the [Agentic Fleet Hub](https://github.com/UrsushoribilisMusic/agentic-fleet-hub). It integrates directly with the fleet's core protocols:
 
-## Multi-Agent Strategy: "The Fleet That Never Sleeps"
+*   **Shared Consciousness**: Agents inherit state and mission goals from the Hub before executing CRM tasks.
+*   **Vault-First Security**: No credentials exist on disk. All API keys (Google OAuth, etc.) are injected into the process memory via **Infisical**.
+*   **Evolutionary Learning**: "Gotchas" found during CRM operations are logged to the fleet ledger and approved as active rules.
+*   **Human-in-the-Loop**: Agents schedule follow-ups directly onto the human manager's **Google Calendar**.
 
-This project implements a **shared consciousness** architecture to coordinate multiple AI agents (Claude, Gemini, Codex) across different sessions.
+---
 
-- **Shared Memory:** Each agent maintains a status file in `AGENTS/` (e.g., `GEMINI_MEMORY.md`).
-- **Coordination Hub:** The `AGENTS/` directory contains current sprint targets and shared coding laws.
-- **Agent Roles:** Each agent has specific instructions (`GEMINI.md`, `CLAUDE.md`) optimizing for their unique strengths.
-- **Switchboard Manager:** The human developer acts as the context architect and final merge authority.
+## 🚀 Key Features
 
-## Tech Stack
+*   **Lead Discovery Dashboard**: Monitor recent social signals and agent-captured leads.
+*   **Sales Pipeline**: Visual Kanban board for managing the lifecycle of complex opportunities.
+*   **Content Calendar**: Month-view grid for agent-scheduled content drops and follow-ups.
+*   **Automatic Audit Trail**: Every status change or outreach attempt is logged automatically by the fleet.
+*   **Mobile-Responsive**: Fully optimized for management on the go via a slide-out navigation system.
+
+---
+
+## 🛠️ Tech Stack
 
 | Layer | Choice |
 |-------|--------|
 | **Frontend** | React (Vite) + Vanilla CSS |
-| **API** | FastAPI (Python) |
+| **Backend** | FastAPI (Python 3.12) |
+| **Vault** | Infisical (EU Region) |
 | **Database** | SQLite via SQLAlchemy |
-| **Validation** | Pydantic v2 |
-| **Coordination** | GitHub Projects (Kanban) |
+| **Deployment** | DigitalOcean VPS + Caddy Reverse Proxy |
 
-## Key Features
+---
 
-- **Home Dashboard:** Dual-column view showing recent activities and active tasks.
-- **Contact Management:** Searchable, sortable list of contacts with location tracking and tagging.
-- **Task Kanban:** Visual board to move tasks between "To Do", "In Progress", and "Closed".
-- **Calendar View:** Monthly grid view showing tasks and activities by due date.
-- **Google Calendar Integration:** One-click task synchronization via OAuth2.
-- **Auto-Audit Trail:** Every task status change automatically logs a note in the interaction history.
-- **Log Activity:** Dedicated interface to capture calls, meetings, and notes for any contact.
+## 📂 Project Structure
 
-## Quick Start
-
-### 1. Backend (FastAPI)
-```bash
-cd customer-mgmt
-python -m venv .venv
-.venv/Scripts/activate   # Windows
-# source .venv/bin/activate  # macOS/Linux
-pip install -r requirements.txt
-uvicorn app.main:app --reload
-```
-
-### 2. Frontend (Vite)
-```bash
-cd customer-mgmt/frontend
-npm install
-npm run dev
-```
-
-The CRM will be available at **http://localhost:5173**.
-
-## Project Structure
-
-```
+```text
 customer-mgmt/
-├── app/                 # FastAPI Backend
-│   ├── main.py          # Entry point & Router registration
-│   ├── models.py        # SQLAlchemy Models (Contact, Task, Activity, Tag)
-│   ├── routers/         # API Endpoints
-│   └── schemas/         # Pydantic Validation
-├── frontend/            # React Frontend
-│   ├── src/
-│   │   ├── components/  # UI Components (Modals, Lists)
-│   │   └── api/         # API Client Utilities
-│   └── index.html       # SPA Entry Point
-├── AGENTS/              # Multi-Agent Coordination Hub
-├── data/                # SQLite Database
-└── DEPLOY.md            # Martin's Deployment Guide
+├── app/                 # FastAPI Backend (Logic & Models)
+├── frontend/            # React Frontend (Vite Build)
+├── data/                # Persistent SQLite Storage
+├── bootstrap.ps1        # Vault-backed secure launch script
+└── DEPLOY.md            # Production deployment guide
 ```
 
-## Kanban Board
-
-Task coordination history: https://github.com/users/UrsushoribilisMusic/projects/2
+---
+**Big Bear Engineering GmbH** — *Engineering discipline, not AI hype.*
