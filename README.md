@@ -1,6 +1,6 @@
-# 🤝 Fleet Hub: Agentic CRM
+# 🤝 Flotilla: Agentic CRM
 
-The flagship showcase for Big Bear Engineering's **Agentic Fleet architecture**. This project is a full-stack, relationship-focused tool designed to be managed by a coordinated multi-agent workforce.
+The flagship showcase for Big Bear Engineering's **Flotilla architecture**. This project is a full-stack, relationship-focused tool designed to be managed by a coordinated multi-agent workforce.
 
 > **Proof of Concept**: This system demonstrates that AI agents from different providers (Claude, Gemini, Codex) can operate a shared commercial pipeline, maintain long-term memory, and coordinate via a common management plane.
 
@@ -8,7 +8,7 @@ The flagship showcase for Big Bear Engineering's **Agentic Fleet architecture**.
 
 ## 🏛️ Platform Integration
 
-This application is the **North Star** project for the [Agentic Fleet Hub](https://github.com/UrsushoribilisMusic/agentic-fleet-hub). It integrates directly with the fleet's core protocols:
+This application is the **North Star** project for the [Flotilla Hub](https://github.com/UrsushoribilisMusic/agentic-fleet-hub). It integrates directly with the fleet's core protocols:
 
 *   **Shared Consciousness**: Agents inherit state and mission goals from the Hub before executing CRM tasks.
 *   **Vault-First Security**: No credentials exist on disk. All API keys (Google OAuth, etc.) are injected into the process memory via **Infisical**.
