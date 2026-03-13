@@ -287,30 +287,42 @@ const App = () => {
     />
   );
 
-  return (
-    <div className="app-container">
-      <button className="mobile-menu-btn" onClick={() => setSidebarOpen(!sidebarOpen)}>
-        {sidebarOpen ? '✕' : '☰'}
-      </button>
+  const isDemoMode = window.location.pathname.includes('/crm-demo/');
 
-      <div className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
-        <div className="sidebar-header">
-          <img src="/crm/assets/icon.svg" alt="Fleet Hub" />
-          <span>Fleet Hub</span>
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+      {isDemoMode && (
+        <div className="hub-portal-bar">
+          <a href="../growth/">← Back to Growth Hub</a>
+          <span>|</span>
+          <a href="../demo/">← Back to Demo Hub</a>
+          <span style={{ marginLeft: 'auto', opacity: 0.5, fontWeight: 400 }}>DEMO ENVIRONMENT</span>
         </div>
-        <nav className="nav-menu">
-          <div className={`nav-item ${activeTab === 'home' ? 'active' : ''}`} onClick={() => handleTabChange('home')}>🏠 Home Dashboard</div>
-          <div className={`nav-item ${activeTab === 'contacts' || activeTab === 'contact-detail' ? 'active' : ''}`} onClick={() => handleTabChange('contacts')}>👥 Lead Discovery</div>
-          <div className={`nav-item ${activeTab === 'pipeline' ? 'active' : ''}`} onClick={() => handleTabChange('pipeline')}>📋 Sales Pipeline</div>
-          <div className={`nav-item ${activeTab === 'calendar' ? 'active' : ''}`} onClick={() => handleTabChange('calendar')}>📅 Content Calendar</div>
-          <div className={`nav-item ${activeTab === 'users' ? 'active' : ''}`} onClick={() => handleTabChange('users')}>⚙️ Fleet Access</div>
-        </nav>
-        <div style={{ marginTop: 'auto', padding: '1.5rem', borderTop: '1px solid var(--border)', textAlign: 'center' }}>
-          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-            © 2025 <a href="https://bigbearengineering.com" target="_blank" rel="noreferrer" style={{ color: 'var(--teal-bright)', textDecoration: 'none' }}>Big Bear Engineering GmbH</a>
-          </p>
+      )}
+      
+      <div className="app-container">
+        <button className="mobile-menu-btn" onClick={() => setSidebarOpen(!sidebarOpen)}>
+          {sidebarOpen ? '✕' : '☰'}
+        </button>
+
+        <div className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
+          <div className="sidebar-header">
+            <img src="/crm/assets/icon.svg" alt="Fleet Hub" />
+            <span>Fleet Hub</span>
+          </div>
+          <nav className="nav-menu">
+            <div className={`nav-item ${activeTab === 'home' ? 'active' : ''}`} onClick={() => handleTabChange('home')}>🏠 Home Dashboard</div>
+            <div className={`nav-item ${activeTab === 'contacts' || activeTab === 'contact-detail' ? 'active' : ''}`} onClick={() => handleTabChange('contacts')}>👥 Lead Discovery</div>
+            <div className={`nav-item ${activeTab === 'pipeline' ? 'active' : ''}`} onClick={() => handleTabChange('pipeline')}>📋 Sales Pipeline</div>
+            <div className={`nav-item ${activeTab === 'calendar' ? 'active' : ''}`} onClick={() => handleTabChange('calendar')}>📅 Content Calendar</div>
+            <div className={`nav-item ${activeTab === 'users' ? 'active' : ''}`} onClick={() => handleTabChange('users')}>⚙️ Fleet Access</div>
+          </nav>
+          <div style={{ marginTop: 'auto', padding: '1.5rem', borderTop: '1px solid var(--border)', textAlign: 'center' }}>
+            <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+              © 2026 <a href="https://bigbearengineering.com" target="_blank" rel="noreferrer" style={{ color: 'var(--teal-bright)', textDecoration: 'none' }}>Big Bear Engineering GmbH</a>
+            </p>
+          </div>
         </div>
-      </div>
       <div className="main-content">
         <header className="header">
           <h2>{activeTab === 'home' ? 'Home' : activeTab === 'pipeline' ? 'Task Kanban' : activeTab === 'calendar' ? 'Calendar' : activeTab === 'users' ? 'Team Management' : 'Contacts'}</h2>
@@ -407,6 +419,7 @@ const App = () => {
           }
         }}
       />
+    </div>
     </div>
   );
 };

@@ -25,6 +25,32 @@ body {
 
 .app-container { display: flex; width: 100%; min-height: 100vh; position: relative; }
 
+/* Hub Portal Bar */
+.hub-portal-bar {
+  background: #000;
+  border-bottom: 1px solid var(--border);
+  padding: 0.5rem 2rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 4000;
+}
+.hub-portal-bar a {
+  color: var(--teal-bright);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+}
+.hub-portal-bar a:hover { color: var(--white); }
+.hub-portal-bar span { opacity: 0.3; }
+
 /* Sidebar */
 .sidebar {
   width: var(--sidebar-width);
